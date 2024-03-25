@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+
+dotenv -e .env -- go run ./src

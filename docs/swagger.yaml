@@ -1,0 +1,25 @@
+info:
+  contact: {}
+paths:
+  /:
+    get:
+      description: Generate a shortenned url
+      parameters:
+      - description: URL to be shortenned
+        in: query
+        name: shortenUrl
+        required: true
+        type: string
+      - description: URL alias, if left black will be randomly generated
+        in: query
+        name: alias
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Shorten URL
+      tags:
+      - URLShortener
+swagger: "2.0"

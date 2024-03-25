@@ -1,0 +1,40 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Generate a shortenned url",
+                "tags": [
+                    "URLShortener"
+                ],
+                "summary": "Shorten URL",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "URL to be shortenned",
+                        "name": "shortenUrl",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "URL alias, if left black will be randomly generated",
+                        "name": "alias",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
