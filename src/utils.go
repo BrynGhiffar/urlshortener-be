@@ -18,12 +18,23 @@ func generateRandomString(length int) string {
 }
 
 func getRedirectExpirationSecsEnv() int64 {
-	var redirectExpirationEnv = os.Getenv("REDIRECT_EXPIRATION_SECS")
+	redirectExpirationEnv, found := os.LookupEnv("REDIRECT_EXPIRATION_SECS")
+	if !found {
+		panic("REDIRECT_EXPIRATION_SECS environment variable not defined")
+	}
 	if val, err := strconv.ParseInt(redirectExpirationEnv, 10, 64); err != nil {
 		panic("REDIRECT_EXPIRATION_SECS environment variable parsing error")
 	} else {
 		return val
 	}
+}
+
+func getSwaggerHostnameEnv() string {
+	hostnameEnv, found := os.LookupEnv("SWAGGER_HOSTNAME")
+	if !found {
+		panic("SWAGGER_HOSTNAME environment variable not defined")
+	}
+	return hostnameEnv
 }
 
 func expiresAfter(secs int64) int64 {

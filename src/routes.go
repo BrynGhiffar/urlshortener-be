@@ -70,7 +70,7 @@ func setupRouter() *gin.Engine {
 	r.Use(cors.Default())
 
 	r.GET("/", shortenUrlRoute)
-	docs.SwaggerInfo.Host = "localhost:8080"
+	docs.SwaggerInfo.Host = getSwaggerHostnameEnv()
 	docs.SwaggerInfo.Title = "URL Shortener Backend"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.GET("/:alias", redirectRoute)
