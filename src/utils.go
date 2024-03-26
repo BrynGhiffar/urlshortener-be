@@ -29,16 +29,3 @@ func getRedirectExpirationSecsEnv() int64 {
 func expiresAfter(secs int64) int64 {
 	return time.Now().UTC().Unix() + secs
 }
-
-func removeExpiredRedirects() {
-	toDelete := []string{}
-	now := time.Now().UTC().Unix()
-	for key, redirect := range db {
-		if now > redirect.expiration {
-			toDelete = append(toDelete, key)
-		}
-	}
-	for _, key := range toDelete {
-		delete(db, key)
-	}
-}

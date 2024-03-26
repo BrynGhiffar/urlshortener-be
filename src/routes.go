@@ -19,6 +19,10 @@ type Redirect struct {
 	expiration int64
 }
 
+type CreateRedirectResponse struct {
+	RedirectAlias string `json:"redirectAlias"`
+}
+
 // ShortenURL godoc
 // @Summary Shorten URL
 // @Description Generate a shortenned url
@@ -45,8 +49,8 @@ func shortenUrlRoute(c *gin.Context) {
 	var expiration int64 = expiresAfter(redirectExpiration)
 
 	db[alias] = Redirect{dest: targetUrl, expiration: expiration}
-	message := fmt.Sprintf("Redirect created to: %v using key: %v", targetUrl, alias)
-	c.String(http.StatusAccepted, message)
+	res := CreateRedirectResponse{RedirectAlias: alias}
+	c.IndentedJSON(http.StatusOK, res)
 }
 
 func redirectRoute(c *gin.Context) {
