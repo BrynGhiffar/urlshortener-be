@@ -43,6 +43,7 @@ func shortenUrlRoute(c *gin.Context) {
 		alias = generateRandomString(5)
 	}
 	if !strings.HasPrefix(targetUrl, "http://") && !strings.HasPrefix(targetUrl, "https://") {
+		// Rely on automatic ssl redirection
 		targetUrl = fmt.Sprintf("http://%v", targetUrl)
 	}
 	// generate expiration
